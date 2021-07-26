@@ -1,0 +1,7 @@
+all:
+  vars:
+    ansible_user: anhul
+  children:
+    ubuntu:
+      hosts:
+        10.0.0.107:
