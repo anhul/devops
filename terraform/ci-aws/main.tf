@@ -13,6 +13,10 @@ provider "aws" {
   profile = "aws-private"
 }
 
+data "aws_vpc" "default" {
+  default = true
+}
+
 module "ec2_instances" {
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = "2.12.0"
@@ -22,10 +26,31 @@ module "ec2_instances" {
 
   ami                    = "ami-0629230e074c580f2"
   instance_type          = "t2.micro"
-  vpc_security_group_ids = ["sg-039f097603511cc9c"]
+  vpc_security_group_ids = [module.jenkins_ui_sg.security_group_id, module.jenkins_ssh.security_group_id]
   subnet_id              = "subnet-52c59c1e"
+  key_name = var.key_name
 
   tags = {
     Jenkins   = "master"
   }
+}
+
+module "jenkins_ui_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+  vpc_id      = data.aws_vpc.default.id
+  name        = "jenkins-ui"
+  description = "Security group for Jenkins UI access"
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["http-8080-tcp"]
+}
+
+module "jenkins_ssh" {
+  source = "terraform-aws-modules/security-group/aws"
+  vpc_id      = data.aws_vpc.default.id
+  name        = "jenkins-ssh"
+  description = "Security group for ssh access to Jenkins servers"
+
+  ingress_cidr_blocks = ["0.0.0.0/0"]
+  ingress_rules       = ["ssh-tcp"]
 }
