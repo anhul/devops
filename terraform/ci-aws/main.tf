@@ -48,9 +48,9 @@ module "jenkins_http_sg" {
   source = "terraform-aws-modules/security-group/aws"
   vpc_id      = data.aws_vpc.default.id
   name        = "jenkins-http"
-  description = "Security group for incomint and outcoming HTTP traffic"
+  description = "Security group for incoming and outgoing HTTP traffic"
 
-  egress_rules        = [ "all-all" ]
+  egress_rules        = ["all-all"]
 }
 module "jenkins_ssh_sg" {
   source = "terraform-aws-modules/security-group/aws"
