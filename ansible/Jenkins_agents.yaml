@@ -1,11 +1,10 @@
 ---
-- name: Provision Jenkins agents
-  hosts: ubuntu
+- name: Provision Jenkins servers
+  hosts: jenkins
   become: yes
   ignore_unreachable: no
 
   tasks:
-
   - name: Install Java
     include_role:
       name: java

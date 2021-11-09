@@ -1,1 +1,13 @@
-#EC2 instances config
+all:
+  children:
+    jenkins:
+      children:
+        controller:
+          hosts:
+            ec2-3-131-133-47.us-east-2.compute.amazonaws.com:
+          vars:
+            ansible_user: ubuntu
+        agents:
+          hosts:
+            
+            

@@ -1,0 +1,4 @@
+- name: Install Java package on Ubuntu
+  apt:
+    name: "{{ java_package }}"
+    state: present

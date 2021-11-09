@@ -1,5 +1,10 @@
 ---
-- name: Install OpenJDK
-  apt:
-    name: default-jdk
-    state: present
+- name: Include version-specific variables for Ubuntu.
+  include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Install Java on host's OS distribution
+  include_tasks: install-{{ ansible_distribution }}.yml
+  # vars:
+  #   java_package: {{java_package}}
+
