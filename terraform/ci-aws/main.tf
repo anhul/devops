@@ -26,7 +26,7 @@ module "ec2_instances" {
 
   ami                    = "ami-0629230e074c580f2"
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [module.jenkins_ui_sg.security_group_id, module.jenkins_ssh.security_group_id]
+  vpc_security_group_ids = [module.jenkins_ui_sg.security_group_id, module.jenkins_ssh_sg.security_group_id, module.jenkins_http_sg.security_group_id]
   subnet_id              = "subnet-52c59c1e"
   key_name = var.key_name
 
@@ -44,8 +44,15 @@ module "jenkins_ui_sg" {
   ingress_cidr_blocks = ["0.0.0.0/0"]
   ingress_rules       = ["http-8080-tcp"]
 }
+module "jenkins_http_sg" {
+  source = "terraform-aws-modules/security-group/aws"
+  vpc_id      = data.aws_vpc.default.id
+  name        = "jenkins-http"
+  description = "Security group for incomint and outcoming HTTP traffic"
 
-module "jenkins_ssh" {
+  egress_rules        = [ "all-all" ]
+}
+module "jenkins_ssh_sg" {
   source = "terraform-aws-modules/security-group/aws"
   vpc_id      = data.aws_vpc.default.id
   name        = "jenkins-ssh"
