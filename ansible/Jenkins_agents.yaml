@@ -8,3 +8,8 @@
   - name: Install Java
     include_role:
       name: java
+
+  - name: Install Jenkins
+    include_role:
+      name: jenkins
+  

@@ -1,0 +1,15 @@
+- name: To use Debian package repository of Jenkins, add the key to the system
+  get_url:
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+    dest: /usr/share/keyrings/jenkins-keyring.asc
+
+- name: Add a Jenkins apt repository entry
+  copy:
+    dest: /etc/apt/sources.list.d/jenkins.list
+    content: |
+      deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian binary/
+
+- name: Install Jenkins packages
+  apt:
+    name: jenkins
+    update_cache: yes

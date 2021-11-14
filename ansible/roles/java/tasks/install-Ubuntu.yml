@@ -1,4 +1,5 @@
-- name: Install Java package on Ubuntu
+- name: Install Java packages
   apt:
     name: "{{ java_package }}"
+    update_cache: yes
     state: present

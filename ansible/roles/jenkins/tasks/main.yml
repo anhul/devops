@@ -1,0 +1,6 @@
+---
+- name: Install Jenkins on host's OS distribution
+  include_tasks: install-{{ ansible_distribution }}.yml
+  
+
+
