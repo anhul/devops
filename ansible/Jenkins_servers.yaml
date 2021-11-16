@@ -12,4 +12,8 @@
   - name: Install Jenkins
     include_role:
       name: jenkins
+      
+  - name: Install Docker
+    include_role:
+      name: docker
   

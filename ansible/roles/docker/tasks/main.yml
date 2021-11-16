@@ -1,0 +1,10 @@
+---
+- name: Install Docker on {{ ansible_distribution }} OS distribution
+  include_tasks: docker-{{ ansible_distribution }}.yml
+
+- name: Install docker-compose on {{ ansible_distribution }} OS distribution
+  include_tasks: compose-{{ ansible_distribution }}.yml
+  
+  
+
+
