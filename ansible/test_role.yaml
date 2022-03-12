@@ -1,0 +1,14 @@
+---
+- name: Test Ansible roles
+  hosts: ubuntu
+  become: yes
+  ignore_unreachable: no
+
+  tasks:
+  - name: kubectl
+    include_role:
+      name: kubectl
+
+  - name: minikube
+    include_role:
+      name: minikube
