@@ -1,7 +1,8 @@
 all:
   vars:
     ansible_user: anhul
+    ansible_connection: local
   children:
     ubuntu:
       hosts:
-        10.0.0.107:
+        localhost:

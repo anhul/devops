@@ -1,0 +1,3 @@
+---
+- name: Install Kubectl on {{ ansible_distribution }} OS distribution
+  include_tasks: kubectl-{{ ansible_distribution }}.yml
