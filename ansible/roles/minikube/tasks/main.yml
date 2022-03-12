@@ -1,0 +1,3 @@
+---
+- name: Install Minikube on {{ ansible_distribution }} OS distribution
+  include_tasks: minikube-{{ ansible_distribution }}.yml

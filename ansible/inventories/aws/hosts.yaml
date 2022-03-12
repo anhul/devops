@@ -4,7 +4,7 @@ all:
       children:
         controller:
           hosts:
-            ec2-3-131-133-47.us-east-2.compute.amazonaws.com:
+            ec2-18-222-13-10.us-east-2.compute.amazonaws.com:
           vars:
             ansible_user: ubuntu
         agents:
